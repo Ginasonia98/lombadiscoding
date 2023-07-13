@@ -1,7 +1,7 @@
 const foods = [
   {
     imageUrl: 'https://www.warisankuliner.com/gfx/recipes/1362376252.jpg',
-    name: 'Mi Aceh',
+    name: 'Mie Aceh',
     origin: 'Nanggroe Aceh Darussalam',
   },
   {
