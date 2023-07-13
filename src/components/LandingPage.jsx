@@ -43,15 +43,24 @@ const LandingPage = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredFoodList || foodList.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(foodList.length / itemsPerPage);
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const goToPreviousPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
   };
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <p className="xl:text-4xl lg:text-2xl md:text-xl sm:text-lg font-bold mb-4 text-center text-gray-800">Welcome Food Hunters!</p>
-      <p className="xl:text-4xl lg:text-2xl md:text-xl sm:text-lg text-gray-800 mb-8 text">Culinary Indonesia Website</p>
+      <p className="xl:text-4xl lg:text-2xl md:text-xl sm:text-lg font-bold mb-4 text-center text-gray-800">
+        Welcome Food Hunters!
+      </p>
+      <p className="xl:text-4xl lg:text-2xl md:text-xl sm:text-lg text-gray-800 mb-8 text">
+        Culinary Indonesia Website
+      </p>
 
       <div className="relative mb-4">
         <input
@@ -74,11 +83,7 @@ const LandingPage = () => {
         {currentItems.map((food) => (
           <div key={food.id} className="bg-white rounded-lg shadow p-4">
             {food.imageUrl && (
-              <img
-                src={food.imageUrl}
-                alt={food.name}
-                className="w-full h-32 object-cover mb-2"
-              />
+              <img src={food.imageUrl} alt={food.name} className="w-full h-32 object-cover mb-2" />
             )}
             <h2 className="text-lg font-bold mb-2">{food.name}</h2>
             <p className="text-gray-600 mb-2">Origin: {food.origin}</p>
@@ -96,10 +101,10 @@ const LandingPage = () => {
       <div className="mt-4">
         {foodList.length > itemsPerPage && (
           <Pagination
-            itemsPerPage={itemsPerPage}
-            totalItems={foodList.length}
             currentPage={currentPage}
-            paginate={paginate}
+            totalPages={totalPages}
+            goToPreviousPage={goToPreviousPage}
+            goToNextPage={goToNextPage}
           />
         )}
       </div>
@@ -109,28 +114,41 @@ const LandingPage = () => {
   );
 };
 
-const Pagination = ({ itemsPerPage, totalItems, currentPage, paginate }) => {
-  const pageNumbers = Array.from({ length: Math.ceil(totalItems / itemsPerPage) }, (_, i) => i + 1);
-
+const Pagination = ({ currentPage, totalPages, goToPreviousPage, goToNextPage }) => {
   return (
     <nav>
-      <ul className="flex space-x-2">
-        {pageNumbers.map((number) => (
-          <li key={number}>
-            <button
-              className={`px-2 py-1 rounded ${number === currentPage ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
-              onClick={() => paginate(number)}
-            >
-              {number}
-            </button>
-          </li>
-        ))}
+      <ul className="flex space-x-2 text-white">
+        <li>
+          <button
+            className={`px-2 py-1 rounded ${
+              currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+            }`}
+            onClick={goToPreviousPage}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+        </li>
+        <li>
+          <button
+            className={`px-2 py-1 rounded ${
+              currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+            }`}
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </li>
       </ul>
     </nav>
   );
 };
 
 export default LandingPage;
+
+
+
 
 
 
