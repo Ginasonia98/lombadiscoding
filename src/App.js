@@ -5,6 +5,8 @@ import Header from './components/Header';
 import { GiFoodTruck } from 'react-icons/gi';
 import Slider from './components/Slidder';
 import Footer from './components/Footer';
+import Breadcrumb from './components/Breadcrumb';
+import Card from './components/Card';
 
 const App = () => {
   return (
@@ -12,6 +14,9 @@ const App = () => {
       <Header />
       <div className="mb-6">
         <Slider />
+      </div>
+      <div className='mb-10'>
+        <Breadcrumb/>
       </div>
       <div className="flex items-center justify-center">
         <LandingPage />
@@ -21,6 +26,9 @@ const App = () => {
           <GiFoodTruck className="ml-2" />
           Let's Eat
         </button>
+      </div>
+      <div className='mt-20'>
+        <Card/>
       </div>
       <div className='mt-5'>
       <Footer/>
