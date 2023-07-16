@@ -7,6 +7,7 @@ import Slider from './components/Slidder';
 import Footer from './components/Footer';
 import Breadcrumb from './components/Breadcrumb';
 import Card from './components/Card';
+import Review from './components/Review';
 
 const App = () => {
   return (
@@ -31,13 +32,27 @@ const App = () => {
         <Card/>
       </div>
       <div className='mt-5'>
-      <Footer/>
-    </div>
+        <h2 className="text-gray-900 font-bold underline xl:text-2xl sm:text-sm mb-4 mx-auto text-center">Food Reviews</h2>
+        <div className="flex flex-wrap justify-center">
+          <Review
+            title="Ucok Durian Medan"
+            videoLink="https://youtu.be/1TDFqGJKFIw"
+          />
+          <Review
+            title="Lumpia Semarang Cik Me Me"
+            videoLink="https://youtu.be/-cWagc50zZk"
+          />
+          <Review
+            title="Ayam Taliwang Khas Pak Udin"
+            videoLink="https://youtu.be/1Bay-qXBl8Q"
+          />
+        </div>
+      </div>
+      <div className='mt-5'>
+        <Footer/>
+      </div>
     </FoodProvider>
   );
 };
 
 export default App;
-
-
-
